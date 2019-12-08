@@ -1,20 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine'
-            args '-p 3000:3000'
-        }
-    }
+    agent none
     environment {
         CI = 'true'
     }
     stages {
         stage('Build') {
+            agent any
             steps {
                 sh 'npm install'
             }
         }
         stage('Sonarqube') {
+            agent any
             environment {
                 scannerHome = tool 'SonarQubeScanner'
             }
