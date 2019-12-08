@@ -17,7 +17,6 @@ pipeline {
         }
         stage('Sonarqube') {
             agent any
-            ws ('ws/sonar-server.properties'){
             environment {
                 scannerHome = tool 'SonarQubeScanner'
             }
@@ -29,7 +28,6 @@ pipeline {
                     waitForQualityGate abortPipeline: true
                 }
             }
-           }
         }
     }
 }
