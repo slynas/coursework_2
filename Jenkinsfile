@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Sonarqube') {
             agent{
-                docker 'node:3-alpine'
+                docker 'node:6-alpine'
             }
             environment {
                 scannerHome = tool 'SonarQubeScanner'
