@@ -15,12 +15,6 @@ pipeline {
             }
         }
         stage('Sonarqube') {
-            agent{
-                docker{
-                    image 'jenkinsci/blueocean'
-                    args '-p 8080'
-                }
-            }
             environment {
                 scannerHome = tool 'SonarQubeScanner'
             }
