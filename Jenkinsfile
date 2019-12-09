@@ -30,7 +30,6 @@ pipeline {
             }
         }
         stage('Push image') {
-            agent any
             steps{
                 script{
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
