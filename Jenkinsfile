@@ -32,7 +32,7 @@ pipeline {
         stage('Push image') {
             steps{
                 script{
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                    docker.withRegistry('https://registry.hub.docker.com/repository/docker/dockerismypal/devops', 'docker-hub-credentials') {
                                 app = docker.build("coursework_2")
                                 app.push("${env.BUILD_NUMBER}")
                                 app.push("latest")
