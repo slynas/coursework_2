@@ -1,0 +1,11 @@
+{
+  "name": "coursework_2",
+  "version": "1.0.0",
+  "description": "Stuart Lynas DevOps Coursework 2",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slynas/coursework_2"
+  },
+  "author": "Stuart Lynas"
+}
