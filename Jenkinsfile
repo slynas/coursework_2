@@ -2,8 +2,6 @@ pipeline {
     agent none
     environment {
         CI = 'true'
-        registry = "dockerismypal/devops"
-        dockerImage = ''
     }
     stages {
         stage('Build') {
@@ -15,7 +13,6 @@ pipeline {
                 }
             steps {
                 sh 'npm install'
-                dockerImage = docker.build registry + ":$BUILD_NUMBER"
             }
         }
         stage('Sonarqube') {
@@ -35,8 +32,8 @@ pipeline {
         stage('Push image') {
             steps{
                 script{
-                    docker.withRegistry('', 'docker-hub-credentials') {
-                                dockerImage.push()
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+                                app.push("latest")
                     }
                 }
             }
