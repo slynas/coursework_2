@@ -36,7 +36,7 @@ node {
     def app
 
    stage('Build image') {
-        app = docker.build("devops")
+        app = docker.build("dockerismypal/devops")
     }
 
     stage('Push image') {
