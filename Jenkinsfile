@@ -36,11 +36,11 @@ node {
     def app
 
    stage('Build image') {
-        app = docker.build("coursework_2")
+        app = docker.build("devops")
     }
 
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com/', 'docker-hub-credentials') {
+        docker.withRegistry('https://hub.docker.com/repository/docker/dockerismypal/devops', 'docker-hub-credentials') {
             app.push("latest")
         }
     }
