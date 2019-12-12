@@ -1,0 +1,40 @@
+name: Configure Node VM
+  hosts: azure
+  user: azureuser
+  become: yes
+
+  vars:
+    myResourceGroup: DevOps
+    myVM: ansible-node
+
+  tasks:
+
+    - name: Install Various Packages
+      apt:
+        update_cache: yes
+        name: "{{ packages }}"
+      vars:
+        packages:
+          - libssl-dev
+          - libffi-dev
+          - python-dev
+          - python-pip
+
+    - name: Install Ansible for Azure
+      command: pip install ansible[azure]
+
+    - stat:
+        path: /home/azureuser/kube_install.sh
+      register: result
+
+    - name: Copy kube_install.sh to Node
+      copy:
+        src: ./kube_install.sh
+        dest: /home/azureuser/kube_install.sh
+      when: result.stat.exists == false
+
+    - name: Set docker.sh permissions
+      command: chmod +x /home/azureuser/kube_install.sh
+
+    - name: Run Docker installation script
+      command: sudo /home/azureuser/kube_install.sh

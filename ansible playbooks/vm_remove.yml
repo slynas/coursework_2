@@ -1,0 +1,22 @@
+- name: Remove VM
+  hosts: localhost
+  user: azureuser
+
+  vars:
+    myResourceGroup: DevOps
+    myVM: ansible-node
+
+  tasks:
+
+    - name: Stop virtual machine
+      azure_rm_virtualmachine:
+        resource_group: "{{ myResourceGroup }}"
+        name: "{{ myVM }}"
+        allocated: no
+
+    - name: Remove a VM and all resources
+      azure_rm_virtualmachine:
+        resource_group: "{{ myResourceGroup }}"
+        name: "{{ myVM }}"
+        remove_on_absent: all
+        state: absent
