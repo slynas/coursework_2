@@ -45,4 +45,16 @@ node {
             app.push("latest")
         }
     }
+
+    stage('Rolling Update'){
+        sh 'ssh azureuser@40.117.171.112
+
+            kubectl set image deployments/devops devops=dockerismypal/devops:latest
+
+            sleep 30s
+
+            export NODE_PORT=$(kubectl get services/node-port-service -o go-template='{{(index .spec.ports 0).nodePort}}')
+
+            curl $(minikupe ip):$NODE_PORT'
+    }
 }
