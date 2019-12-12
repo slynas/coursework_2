@@ -47,6 +47,10 @@ node {
     }
 
     stage('Rolling Update'){
-        sh 'ssh azureuser@40.117.171.112 kubectl set image deployments/devops devops=dockerismypal/devops:latest sleep 30s export NODE_PORT=$(kubectl get services/node-port-service -o go-template='{{(index .spec.ports 0).nodePort}}') curl $(minikupe ip):$NODE_PORT'
+        sh 'ssh azureuser@40.117.171.112'
+        sh 'kubectl set image deployments/devops devops=dockerismypal/devops:latest'
+        sh 'sleep 30s'
+        sh 'export NODE_PORT=$(kubectl get services/node-port-service -o go-template='{{(index .spec.ports 0).nodePort}}')'
+        sh 'curl $(minikupe ip):$NODE_PORT'
     }
 }
