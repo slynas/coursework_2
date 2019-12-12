@@ -47,7 +47,7 @@ node {
     }
 
     stage('Rolling Update'){
-        sh 'ssh azureuser@40.117.171.112'
+        sh 'ssh -t azureuser@40.117.171.112'
         sh 'kubectl set image deployments/devops devops=dockerismypal/devops:latest'
     }
 }
