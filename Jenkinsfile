@@ -45,9 +45,4 @@ node {
             app.push("latest")
         }
     }
-
-    stage('Rolling Update'){
-        sh 'cd /home/username/scripts'
-        sh './rolling-update.sh'
-    }
 }
