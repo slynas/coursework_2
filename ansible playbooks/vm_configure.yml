@@ -24,6 +24,22 @@ name: Configure Node VM
       command: pip install ansible[azure]
 
     - stat:
+        path: /home/azureuser/docker_node.sh
+      register: result
+
+    - name: Copy docker_node.sh to Node
+      copy:
+        src: ./docker_node.sh
+        dest: /home/azureuser/docker_node.sh
+      when: result.stat.exists == false
+
+    - name: Set docker.sh permissions
+      command: chmod +x /home/azureuser/docker_node.sh
+
+    - name: Run Docker installation script
+      command: sudo /home/azureuser/docker_node.sh
+
+    - stat:
         path: /home/azureuser/kube_install.sh
       register: result
 
